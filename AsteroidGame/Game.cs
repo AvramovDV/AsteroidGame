@@ -48,7 +48,7 @@ namespace AsteroidGame
             Objects = new BaseObject[45];
             for (int i = 0; i < Objects.Length * 2 / 3; i = i + 2)
             {
-                Objects[i] = new BaseObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20));
+                Objects[i] = new Asteroids(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20));
             }
             for (int i = 1; i < Objects.Length * 2 / 3; i = i + 2)
             {
