@@ -14,6 +14,7 @@ namespace AsteroidGame
         public static BufferedGraphics Buffer;
 
         public static BaseObject[] Objects;
+        public static List<BaseObject> Lobjects;
 
         public static int Width { get; set; }
         public static int Height { get; set; }
@@ -43,14 +44,20 @@ namespace AsteroidGame
 
         public static void Load()
         {
-            Objects = new BaseObject[30];
-            for (int i = 0; i < Objects.Length; i = i + 2)
+            Random random = new Random();
+            Objects = new BaseObject[45];
+            for (int i = 0; i < Objects.Length * 2 / 3; i = i + 2)
             {
                 Objects[i] = new BaseObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20));
             }
-            for (int i = 1; i < Objects.Length; i = i + 2)
+            for (int i = 1; i < Objects.Length * 2 / 3; i = i + 2)
             {
                 Objects[i] = new Star(new Point(600, i * 20), new Point(i, 0), new Size(5, 5));
+            }
+            for (int i = Objects.Length * 2 / 3; i < Objects.Length; i++)
+            {
+                int x = 50 + (i - Objects.Length * 2 / 3) * (45);
+                Objects[i] = new Star2(new Point(x, (int)(Math.Cos(0.04*x)*200 + 300)), new Point(4, 4), new Size(5, 5));
             }
         }
 
