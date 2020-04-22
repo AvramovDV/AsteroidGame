@@ -44,9 +44,13 @@ namespace AsteroidGame
         public static void Load()
         {
             Objects = new BaseObject[30];
-            for (int i = 0; i < Objects.Length; i++)
+            for (int i = 0; i < Objects.Length; i = i + 2)
             {
                 Objects[i] = new BaseObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20));
+            }
+            for (int i = 1; i < Objects.Length; i = i + 2)
+            {
+                Objects[i] = new Star(new Point(600, i * 20), new Point(i, 0), new Size(5, 5));
             }
         }
 
