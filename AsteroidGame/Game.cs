@@ -52,6 +52,11 @@ namespace AsteroidGame
             Width = form.ClientSize.Width;
             Height = form.ClientSize.Height;
 
+            if (Width > 1000 || Width < 0 || Height > 1000 || Height < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
             Buffer = _context.Allocate(graphics, new Rectangle(0, 0, Width, Height));
             Load();
 
