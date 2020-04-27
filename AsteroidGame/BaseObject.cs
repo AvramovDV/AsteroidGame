@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace AsteroidGame
 {
-    abstract class BaseObject
+    abstract class BaseObject : ICollision
     {
         protected Point pos;
         protected Point dir;
@@ -16,19 +16,17 @@ namespace AsteroidGame
             this.size = size;
         }
 
+        
         public virtual void Draw()
         {
             Game.Buffer.Graphics.DrawEllipse(Pens.White, pos.X, pos.Y, size.Width, size.Height);
         }
 
         public abstract void Update();
-        //{
-        //    pos.X = pos.X + dir.X;
-        //    pos.Y = pos.Y + dir.Y;
-        //    if (pos.X < 0) dir.X = -dir.X;
-        //    if (pos.X > Game.Width) dir.X = -dir.X;
-        //    if (pos.Y < 0) dir.Y = -dir.Y;
-        //    if (pos.Y > Game.Height) dir.Y = -dir.Y;
-        //}
+
+        public Rectangle Rect => new Rectangle(pos, size);
+
+        public bool Collision(ICollision obj) => obj.Rect.IntersectsWith(this.Rect);
+
     }
 }
