@@ -14,6 +14,11 @@ namespace AsteroidGame
             this.pos = pos;
             this.dir = dir;
             this.size = size;
+            if (size.Width < 0 || size.Height < 0)
+            {
+                throw new GameObjectException("Объект не может иметь отрицательный размер");
+            }
+            
         }
 
         
