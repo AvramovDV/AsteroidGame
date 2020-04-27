@@ -18,11 +18,22 @@ namespace Lesson2Task1
 
         static void Main(string[] args)
         {
+            Console.WriteLine("До сортировки");
+
             for (int i = 0; i < _workers.Length; i++)
             {
                 Console.WriteLine($"{_workers[i].Name} получает в месяц: {_workers[i].GetSalary()}");
             }
-            
+
+            Array.Sort(_workers);
+
+            Console.WriteLine("После сортировки");
+
+            for (int i = 0; i < _workers.Length; i++)
+            {
+                Console.WriteLine($"{_workers[i].Name} получает в месяц: {_workers[i].GetSalary()}");
+            }
+
             Console.ReadKey();
         }
     }
