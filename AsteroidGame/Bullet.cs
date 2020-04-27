@@ -18,7 +18,7 @@ namespace AsteroidGame
             Game.Buffer.Graphics.FillEllipse(Brushes.Red, pos.X, pos.Y, size.Width, size.Height);
             Game.Buffer.Graphics.DrawEllipse(Pens.White, pos.X, pos.Y, size.Width, size.Height);
         }
-
+                
         public override void Update()
         {
             pos.X = pos.X + dir.X;
@@ -27,6 +27,11 @@ namespace AsteroidGame
                 pos.X = 0;
             }
         }
-        
+
+        public override void OnCollisionEnter()
+        {
+            pos.X = 0;
+        }
+
     }
 }

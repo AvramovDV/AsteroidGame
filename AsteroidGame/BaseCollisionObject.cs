@@ -17,5 +17,7 @@ namespace AsteroidGame
 
         public bool Collision(ICollision obj) => obj.Rect.IntersectsWith(this.Rect);
 
+        public abstract void OnCollisionEnter();
+
     }
 }

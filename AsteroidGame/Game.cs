@@ -121,6 +121,8 @@ namespace AsteroidGame
                 if (CollisionObjects[i].Collision(_bullet))
                 {
                     System.Media.SystemSounds.Hand.Play();
+                    CollisionObjects[i].OnCollisionEnter();
+                    _bullet.OnCollisionEnter();
                 }
             }
 

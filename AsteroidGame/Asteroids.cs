@@ -19,13 +19,17 @@ namespace AsteroidGame
         {
             Game.Buffer.Graphics.DrawImage(_image, pos.X, pos.Y, size.Width, size.Height);
         }
-
+                
         public override void Update()
         {
             pos.X = pos.X - dir.X;
             if (pos.X < 0) pos.X = Game.Width + size.Width;
         }
 
-        
+        public override void OnCollisionEnter()
+        {
+            pos.X = Game.Width;
+        }
+
     }
 }
