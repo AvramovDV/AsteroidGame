@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace AsteroidGame
 {
-    abstract class BaseObject : ICollision
+    abstract class BaseObject
     {
         protected Point pos;
         protected Point dir;
@@ -23,10 +23,7 @@ namespace AsteroidGame
         }
 
         public abstract void Update();
-
-        public Rectangle Rect => new Rectangle(pos, size);
-
-        public bool Collision(ICollision obj) => obj.Rect.IntersectsWith(this.Rect);
+               
 
     }
 }

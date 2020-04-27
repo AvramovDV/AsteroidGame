@@ -22,11 +22,17 @@ namespace AsteroidGame
         private const int _star2Speed = 5;
         private const int _star2Count = 10;
 
+        private const int _bulletSpeed = 5;
+        private const int _bulletSize = 20;
+
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer { get; set; }
 
         //public static BaseObject[] Objects;
         public static List<BaseObject> Objects { get; set; }
+        public static List<BaseCollisionObject> CollisionObjects { get; set; }
+
+        public static Bullet _bullet { get; set; }
 
         public static int Width { get; set; }
         public static int Height { get; set; }
@@ -59,10 +65,11 @@ namespace AsteroidGame
             Random rand = new Random();
             //Objects = new BaseObject[45];
             Objects = new List<BaseObject>();
+            CollisionObjects = new List<BaseCollisionObject>();
 
             for (int i = 0; i < _asteroidCount; i++)
             {
-                Objects.Add(new Asteroids(new Point(rand.Next(0, 600), (int)(i * (1f / (_asteroidCount - 1)) * Height)), new Point(_asteroidSpeed, 0), new Size(_asteroidSize, _asteroidSize)));
+                CollisionObjects.Add(new Asteroids(new Point(rand.Next(0, 600), (int)(i * (1f / (_asteroidCount - 1)) * Height)), new Point(_asteroidSpeed, 0), new Size(_asteroidSize, _asteroidSize)));
             }
             for (int i = 0; i < _starCount; i++)
             {
@@ -72,6 +79,8 @@ namespace AsteroidGame
             {
                 Objects.Add(new Star2(new Point((int)(Width * (i + 0.5f) / _star2Count), (int)rand.Next(0, Height)), new Point(_star2Speed, _star2Speed), new Size(_star2Size, _star2Size)));
             }
+
+            _bullet = new Bullet(new Point(0, rand.Next(10, Height - 10)), new Point(_bulletSpeed, 0), new Size(_bulletSize, _bulletSize));
 
         }
 
@@ -87,6 +96,13 @@ namespace AsteroidGame
             {
                 Objects[i].Draw();
             }
+
+            for (int i = 0; i < CollisionObjects.Count; i++)
+            {
+                CollisionObjects[i].Draw();
+            }
+            _bullet.Draw();
+
             Buffer.Render();
         }
 
@@ -95,7 +111,20 @@ namespace AsteroidGame
             for (int i = 0; i < Objects.Count; i++)
             {
                 Objects[i].Update();
+                
             }
+
+            for (int i = 0; i < CollisionObjects.Count; i++)
+            {
+                CollisionObjects[i].Update();
+
+                if (CollisionObjects[i].Collision(_bullet))
+                {
+                    System.Media.SystemSounds.Hand.Play();
+                }
+            }
+
+            _bullet.Update();
         }
 
         private static void Timer_Tick(object sender, EventArgs e)

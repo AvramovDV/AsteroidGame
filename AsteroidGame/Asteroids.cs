@@ -5,7 +5,7 @@ using System.IO;
 
 namespace AsteroidGame
 {
-    class Asteroids : BaseObject
+    class Asteroids : BaseCollisionObject
     {
         private const string _fileName = "Asteroid.png";
         private Image _image;
@@ -25,5 +25,7 @@ namespace AsteroidGame
             pos.X = pos.X - dir.X;
             if (pos.X < 0) pos.X = Game.Width + size.Width;
         }
+
+        
     }
 }

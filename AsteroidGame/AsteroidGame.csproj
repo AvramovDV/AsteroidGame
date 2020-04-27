@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asteroids.cs" />
+    <Compile Include="BaseCollisionObject.cs" />
     <Compile Include="BaseObject.cs" />
+    <Compile Include="Bullet.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="ICollision.cs" />
     <Compile Include="Program.cs" />
