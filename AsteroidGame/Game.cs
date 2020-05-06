@@ -120,20 +120,25 @@ namespace AsteroidGame
             //Buffer.Render();
 
             Buffer.Graphics.Clear(Color.Black);
-            for (int i = 0; i < Objects.Count; i++)
-            {
-                Objects[i].Draw();
-            }
 
-            for (int i = 0; i < CollisionObjects.Count; i++)
-            {
-                CollisionObjects[i].Draw();
-            }
+            //for (int i = 0; i < Objects.Count; i++)
+            //{
+            //    Objects[i].Draw();
+            //}
 
-            for (int i = 0; i < Bullets.Count; i++)
-            {
-                Bullets[i].Draw();
-            }
+            //for (int i = 0; i < CollisionObjects.Count; i++)
+            //{
+            //    CollisionObjects[i].Draw();
+            //}
+
+            //for (int i = 0; i < Bullets.Count; i++)
+            //{
+            //    Bullets[i].Draw();
+            //}
+
+            foreach (BaseObject baseObject in Objects) baseObject.Draw();
+            foreach (BaseCollisionObject baseCollisionObject in CollisionObjects) baseCollisionObject.Draw();
+            foreach (Bullet bullet in Bullets) bullet.Draw();
 
             //_bullet?.Draw();
 
@@ -151,11 +156,13 @@ namespace AsteroidGame
 
         public static void Update()
         {
-            for (int i = 0; i < Objects.Count; i++)
-            {
-                Objects[i].Update();
+            //for (int i = 0; i < Objects.Count; i++)
+            //{
+            //    Objects[i].Update();
                 
-            }
+            //}
+
+            foreach (BaseObject baseObject in Objects) baseObject.Update();
 
             for (int i = 0; i < CollisionObjects.Count; i++)
             {
@@ -188,10 +195,12 @@ namespace AsteroidGame
                 }
             }
 
-            for (int j = 0; j < Bullets.Count; j++)
-            {
-                Bullets[j].Update();
-            }
+            //for (int j = 0; j < Bullets.Count; j++)
+            //{
+            //    Bullets[j].Update();
+            //}
+
+            foreach (Bullet bullet in Bullets.ToArray()) bullet.Update();
 
             //_bullet?.Update();
 
