@@ -112,7 +112,15 @@ namespace AsteroidGame
             {
                 CollisionObjects[i].Draw();
             }
+
             _bullet.Draw();
+
+            _ship.Draw();
+
+            if (_ship != null)
+            {
+                Buffer.Graphics.DrawString($"Energy: {_ship.Energy}", SystemFonts.DefaultFont, Brushes.White, 0, 0);
+            }
 
             Buffer.Render();
         }
@@ -134,6 +142,12 @@ namespace AsteroidGame
                     System.Media.SystemSounds.Hand.Play();
                     CollisionObjects[i].OnCollisionEnter();
                     _bullet.OnCollisionEnter();
+                }
+
+                if (CollisionObjects[i].Collision(_ship))
+                {
+                    CollisionObjects[i].OnCollisionEnter();
+                    _ship.OnCollisionEnter();
                 }
             }
 

@@ -29,7 +29,13 @@ namespace AsteroidGame
 
         public override void OnCollisionEnter()
         {
-            
+            Random rnd = new Random();
+            EnergyLow(rnd.Next(1, 10));
+            System.Media.SystemSounds.Asterisk.Play();
+            if (Energy <= 0)
+            {
+                Die();
+            }
         }
 
         public override void Update()
