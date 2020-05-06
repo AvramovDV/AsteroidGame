@@ -5,9 +5,9 @@ using System.IO;
 
 namespace AsteroidGame
 {
-    class Asteroids : BaseObject
+    class Asteroids : BaseCollisionObject
     {
-        private string _fileName = "Asteroid.png";
+        private const string _fileName = "Asteroid.png";
         private Image _image;
         
         public Asteroids(Point pos, Point dir, Size size) : base(pos, dir, size)
@@ -18,6 +18,17 @@ namespace AsteroidGame
         public override void Draw()
         {
             Game.Buffer.Graphics.DrawImage(_image, pos.X, pos.Y, size.Width, size.Height);
+        }
+                
+        public override void Update()
+        {
+            pos.X = pos.X - dir.X;
+            if (pos.X < 0) pos.X = Game.Width + size.Width;
+        }
+
+        public override void OnCollisionEnter()
+        {
+            pos.X = Game.Width;
         }
 
     }
