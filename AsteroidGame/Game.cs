@@ -82,6 +82,7 @@ namespace AsteroidGame
             form.KeyDown += Form_KeyDown;
 
             Ship.MessageDie += Finish;
+                      
 
         }
 

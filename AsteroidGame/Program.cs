@@ -20,6 +20,9 @@ namespace AsteroidGame
             Game.Init(form);
             form.Show();
             Game.Draw();
+
+            Dictionary<int, int> dict = Lesson4Task2.GetDoublesCount();
+
             Application.Run(form);
         }
     }
