@@ -34,6 +34,8 @@ namespace AsteroidGame
 
         public static Bullet _bullet { get; set; }
 
+        public static Ship _ship { get; set; }
+
         public static int Width { get; set; }
         public static int Height { get; set; }
 
@@ -63,6 +65,9 @@ namespace AsteroidGame
             Timer timer = new Timer { Interval = 100 };
             timer.Start();
             timer.Tick += Timer_Tick;
+
+            form.KeyDown += Form_KeyDown;
+
         }
 
         public static void Load()
@@ -87,6 +92,7 @@ namespace AsteroidGame
 
             _bullet = new Bullet(new Point(0, rand.Next(10, Height - 10)), new Point(_bulletSpeed, 0), new Size(_bulletSize, _bulletSize));
 
+            _ship = new Ship(new Point(10, 400), new Point(5, 5), new Size(10, 10));
         }
 
         public static void Draw()
@@ -138,6 +144,22 @@ namespace AsteroidGame
         {
             Draw();
             Update();
+        }
+
+        private static void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey) 
+            {
+                _bullet = new Bullet(new Point(_ship.Rect.X + 10, _ship.Rect.Y + 4), new Point(4, 0), new Size(4, 1));
+            }
+            if (e.KeyCode == Keys.Up)
+            {
+                _ship.Up();
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                _ship.Down();
+            }
         }
 
     }
