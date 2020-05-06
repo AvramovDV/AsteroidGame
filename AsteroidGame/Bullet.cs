@@ -30,6 +30,7 @@ namespace AsteroidGame
 
         public override void OnCollisionEnter()
         {
+            Game.Count++;
             Game.DestroyBullet(this);
         }
 

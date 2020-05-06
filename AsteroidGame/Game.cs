@@ -48,6 +48,8 @@ namespace AsteroidGame
         public static int Width { get; set; }
         public static int Height { get; set; }
 
+        public static int Count { get; set; } = 0;
+
         static Game()
         {
 
@@ -141,7 +143,7 @@ namespace AsteroidGame
 
             if (_ship != null)
             {
-                Buffer.Graphics.DrawString($"Energy: {_ship.Energy}", SystemFonts.DefaultFont, Brushes.White, 0, 0);
+                Buffer.Graphics.DrawString($"Energy: {_ship.Energy} Count: {Count}", SystemFonts.DefaultFont, Brushes.White, 0, 0);
             }
 
             Buffer.Render();
