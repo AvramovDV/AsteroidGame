@@ -23,7 +23,10 @@ namespace AsteroidGame
         private const int _star2Count = 10;
 
         private const int _bulletSpeed = 5;
-        private const int _bulletSize = 20;
+        private const int _bulletSize = 5;
+
+        private const int _medHelpSpeed = 5;
+        private const int _medHelpSize = 15;
 
         private static BufferedGraphicsContext _context;
 
@@ -39,6 +42,8 @@ namespace AsteroidGame
         public static Bullet _bullet { get; set; }
 
         public static Ship _ship { get; set; }
+
+        public static MedHelp _medHelp { get; set; }
 
         public static int Width { get; set; }
         public static int Height { get; set; }
@@ -100,6 +105,9 @@ namespace AsteroidGame
             //_bullet = new Bullet(new Point(0, rand.Next(10, Height - 10)), new Point(_bulletSpeed, 0), new Size(_bulletSize, _bulletSize));
 
             _ship = new Ship(new Point(10, 400), new Point(5, 5), new Size(10, 10));
+
+            _medHelp = new MedHelp(new Point(Width, rand.Next(10, Height - 10)), new Point(_medHelpSpeed, 0), new Size(_medHelpSize, _medHelpSize));
+
         }
 
         public static void Draw()
@@ -128,6 +136,8 @@ namespace AsteroidGame
             //_bullet?.Draw();
 
             _ship.Draw();
+
+            _medHelp?.Draw();
 
             if (_ship != null)
             {
@@ -182,6 +192,14 @@ namespace AsteroidGame
             }
 
             //_bullet?.Update();
+
+            _medHelp.Update();
+
+            if (_medHelp.Collision(_ship))
+            {
+                _medHelp.OnCollisionEnter();
+            }
+
         }
 
         private static void Timer_Tick(object sender, EventArgs e)
