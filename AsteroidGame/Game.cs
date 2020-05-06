@@ -34,6 +34,7 @@ namespace AsteroidGame
         //public static BaseObject[] Objects;
         public static List<BaseObject> Objects { get; set; }
         public static List<BaseCollisionObject> CollisionObjects { get; set; }
+        public static List<Bullet> Bullets { get; set; }
 
         public static Bullet _bullet { get; set; }
 
@@ -81,6 +82,7 @@ namespace AsteroidGame
             //Objects = new BaseObject[45];
             Objects = new List<BaseObject>();
             CollisionObjects = new List<BaseCollisionObject>();
+            Bullets = new List<Bullet>();
 
             for (int i = 0; i < _asteroidCount; i++)
             {
@@ -95,7 +97,7 @@ namespace AsteroidGame
                 Objects.Add(new Star2(new Point((int)(Width * (i + 0.5f) / _star2Count), (int)rand.Next(0, Height)), new Point(_star2Speed, _star2Speed), new Size(_star2Size, _star2Size)));
             }
 
-            _bullet = new Bullet(new Point(0, rand.Next(10, Height - 10)), new Point(_bulletSpeed, 0), new Size(_bulletSize, _bulletSize));
+            //_bullet = new Bullet(new Point(0, rand.Next(10, Height - 10)), new Point(_bulletSpeed, 0), new Size(_bulletSize, _bulletSize));
 
             _ship = new Ship(new Point(10, 400), new Point(5, 5), new Size(10, 10));
         }
@@ -118,7 +120,12 @@ namespace AsteroidGame
                 CollisionObjects[i].Draw();
             }
 
-            _bullet.Draw();
+            for (int i = 0; i < Bullets.Count; i++)
+            {
+                Bullets[i].Draw();
+            }
+
+            //_bullet?.Draw();
 
             _ship.Draw();
 
@@ -142,12 +149,25 @@ namespace AsteroidGame
             {
                 CollisionObjects[i].Update();
 
-                if (CollisionObjects[i].Collision(_bullet))
+                for (int j = 0; j < Bullets.Count; j++)
                 {
-                    System.Media.SystemSounds.Hand.Play();
-                    CollisionObjects[i].OnCollisionEnter();
-                    _bullet.OnCollisionEnter();
+                    if (CollisionObjects[i].Collision(Bullets[j]))
+                    {
+                        System.Media.SystemSounds.Hand.Play();
+                        CollisionObjects[i].OnCollisionEnter();
+                        //_bullet.OnCollisionEnter();
+                        //Bullets.RemoveAt(j);
+                        Bullets[j].OnCollisionEnter();
+                    }
                 }
+
+                //if (_bullet != null && CollisionObjects[i].Collision(_bullet))
+                //{
+                //    System.Media.SystemSounds.Hand.Play();
+                //    CollisionObjects[i].OnCollisionEnter();
+                //    //_bullet.OnCollisionEnter();
+                //    _bullet = null;
+                //}
 
                 if (CollisionObjects[i].Collision(_ship))
                 {
@@ -156,7 +176,12 @@ namespace AsteroidGame
                 }
             }
 
-            _bullet.Update();
+            for (int j = 0; j < Bullets.Count; j++)
+            {
+                Bullets[j].Update();
+            }
+
+            //_bullet?.Update();
         }
 
         private static void Timer_Tick(object sender, EventArgs e)
@@ -169,7 +194,8 @@ namespace AsteroidGame
         {
             if (e.KeyCode == Keys.ControlKey) 
             {
-                _bullet = new Bullet(new Point(_ship.Rect.X + 10, _ship.Rect.Y + 4), new Point(4, 0), new Size(4, 1));
+                //_bullet = new Bullet(new Point(_ship.Rect.X + 10, _ship.Rect.Y + 4), new Point(4, 0), new Size(4, 1));
+                Bullets.Add(new Bullet(new Point(_ship.Rect.X + 10, _ship.Rect.Y + 4), new Point(4, 0), new Size(4, 1)));
             }
             if (e.KeyCode == Keys.Up)
             {
@@ -186,6 +212,11 @@ namespace AsteroidGame
             _timer.Stop();
             Buffer.Graphics.DrawString("The End", new Font(FontFamily.GenericSansSerif, 60, FontStyle.Underline), Brushes.White, 200, 100);
             Buffer.Render();
+        }
+
+        public static void DestroyBullet(Bullet bullet)
+        {
+            Bullets.Remove(bullet);
         }
 
     }
