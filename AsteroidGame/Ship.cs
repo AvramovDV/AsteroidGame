@@ -11,6 +11,8 @@ namespace AsteroidGame
     {
         private int _energy = 100;
 
+        public static event Message MessageDie;
+
         public int Energy { get => _energy; }
 
         public Ship(Point pos, Point dir, Size size) : base(pos, dir, size)
@@ -61,7 +63,7 @@ namespace AsteroidGame
 
         public void Die()
         {
-
+            MessageDie?.Invoke();
         }
 
     }

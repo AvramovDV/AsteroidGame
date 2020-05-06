@@ -26,6 +26,9 @@ namespace AsteroidGame
         private const int _bulletSize = 20;
 
         private static BufferedGraphicsContext _context;
+
+        private static Timer _timer = new Timer();
+
         public static BufferedGraphics Buffer { get; set; }
 
         //public static BaseObject[] Objects;
@@ -62,11 +65,13 @@ namespace AsteroidGame
             Buffer = _context.Allocate(graphics, new Rectangle(0, 0, Width, Height));
             Load();
 
-            Timer timer = new Timer { Interval = 100 };
-            timer.Start();
-            timer.Tick += Timer_Tick;
+            _timer = new Timer { Interval = 100 };
+            _timer.Start();
+            _timer.Tick += Timer_Tick;
 
             form.KeyDown += Form_KeyDown;
+
+            Ship.MessageDie += Finish;
 
         }
 
@@ -174,6 +179,13 @@ namespace AsteroidGame
             {
                 _ship.Down();
             }
+        }
+
+        public static void Finish()
+        {
+            _timer.Stop();
+            Buffer.Graphics.DrawString("The End", new Font(FontFamily.GenericSansSerif, 60, FontStyle.Underline), Brushes.White, 200, 100);
+            Buffer.Render();
         }
 
     }
