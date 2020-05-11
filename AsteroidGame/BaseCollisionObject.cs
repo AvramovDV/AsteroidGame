@@ -9,6 +9,9 @@ namespace AsteroidGame
 {
     internal abstract class BaseCollisionObject : BaseObject, ICollision
     {
+
+        public delegate void Message();
+
         public BaseCollisionObject(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
         }

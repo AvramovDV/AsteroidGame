@@ -24,13 +24,14 @@ namespace AsteroidGame
             pos.X = pos.X + dir.X;
             if (pos.X > Game.Width)
             {
-                pos.X = 0;
+                Game.DestroyBullet(this);
             }
         }
 
         public override void OnCollisionEnter()
         {
-            pos.X = 0;
+            Game.Count++;
+            Game.DestroyBullet(this);
         }
 
     }
