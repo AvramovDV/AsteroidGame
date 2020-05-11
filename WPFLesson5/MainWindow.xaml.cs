@@ -59,5 +59,10 @@ namespace WPFLesson5
             DepartmentsComboBox.SelectedIndex = _departments.IndexOf(_employees[0].Department);
         }
 
+        private void EmployeesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DepartmentsComboBox.SelectedIndex = _departments.IndexOf(_employees[EmployeesComboBox.SelectedIndex].Department);
+        }
+
     }
 }

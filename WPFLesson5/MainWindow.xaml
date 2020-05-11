@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ComboBox x:Name="EmployeesComboBox" HorizontalAlignment="Left" Margin="169,194,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="EmployeesComboBox" HorizontalAlignment="Left" Margin="169,194,0,0" VerticalAlignment="Top" Width="120"  SelectionChanged="EmployeesComboBox_SelectionChanged"/>
         <Label x:Name="EmployeesLabel" Content="Сотрудники" HorizontalAlignment="Left" Margin="169,153,0,0" VerticalAlignment="Top"/>
         <Label x:Name="DepartmentsLabel" Content="Отделы" HorizontalAlignment="Left" Margin="466,153,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="DepartmentsComboBox" HorizontalAlignment="Left" Margin="466,194,0,0" VerticalAlignment="Top" Width="120"/>
