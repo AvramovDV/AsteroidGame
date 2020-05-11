@@ -28,7 +28,8 @@ namespace AsteroidGame
 
         public override void OnCollisionEnter()
         {
-            pos.X = Game.Width;
+            //pos.X = Game.Width;
+            Game.DestroyAsteroid(this);
         }
 
     }

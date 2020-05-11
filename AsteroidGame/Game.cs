@@ -12,7 +12,7 @@ namespace AsteroidGame
     {
         private const int _asteroidSize = 20;
         private const int _asteroidSpeed = 5;
-        private const int _asteroidCount = 20;
+        private const int _asteroidCount = 2;
 
         private const int _starSize = 5;
         private const int _starSpeed = 10;
@@ -22,7 +22,7 @@ namespace AsteroidGame
         private const int _star2Speed = 5;
         private const int _star2Count = 10;
 
-        private const int _bulletSpeed = 5;
+        private const int _bulletSpeed = 15;
         private const int _bulletSize = 5;
 
         private const int _medHelpSpeed = 5;
@@ -36,7 +36,7 @@ namespace AsteroidGame
 
         //public static BaseObject[] Objects;
         public static List<BaseObject> Objects { get; set; }
-        public static List<BaseCollisionObject> CollisionObjects { get; set; }
+        public static List<Asteroids> CollisionObjects { get; set; }
         public static List<Bullet> Bullets { get; set; }
 
         public static Bullet _bullet { get; set; }
@@ -49,6 +49,8 @@ namespace AsteroidGame
         public static int Height { get; set; }
 
         public static int Count { get; set; } = 0;
+
+        public static int AsteroidCount { get; set; } = _asteroidCount;
 
         static Game()
         {
@@ -80,6 +82,7 @@ namespace AsteroidGame
             form.KeyDown += Form_KeyDown;
 
             Ship.MessageDie += Finish;
+                      
 
         }
 
@@ -88,12 +91,12 @@ namespace AsteroidGame
             Random rand = new Random();
             //Objects = new BaseObject[45];
             Objects = new List<BaseObject>();
-            CollisionObjects = new List<BaseCollisionObject>();
+            CollisionObjects = new List<Asteroids>(_asteroidCount);
             Bullets = new List<Bullet>();
 
             for (int i = 0; i < _asteroidCount; i++)
             {
-                CollisionObjects.Add(new Asteroids(new Point(rand.Next(0, 600), (int)(i * (1f / (_asteroidCount - 1)) * Height)), new Point(_asteroidSpeed, 0), new Size(_asteroidSize, _asteroidSize)));
+                CollisionObjects.Add(new Asteroids(new Point(rand.Next(0, 600), rand.Next(10, Height - 10)), new Point(_asteroidSpeed, 0), new Size(_asteroidSize, _asteroidSize)));
             }
             for (int i = 0; i < _starCount; i++)
             {
@@ -120,20 +123,25 @@ namespace AsteroidGame
             //Buffer.Render();
 
             Buffer.Graphics.Clear(Color.Black);
-            for (int i = 0; i < Objects.Count; i++)
-            {
-                Objects[i].Draw();
-            }
 
-            for (int i = 0; i < CollisionObjects.Count; i++)
-            {
-                CollisionObjects[i].Draw();
-            }
+            //for (int i = 0; i < Objects.Count; i++)
+            //{
+            //    Objects[i].Draw();
+            //}
 
-            for (int i = 0; i < Bullets.Count; i++)
-            {
-                Bullets[i].Draw();
-            }
+            //for (int i = 0; i < CollisionObjects.Count; i++)
+            //{
+            //    CollisionObjects[i].Draw();
+            //}
+
+            //for (int i = 0; i < Bullets.Count; i++)
+            //{
+            //    Bullets[i].Draw();
+            //}
+
+            foreach (BaseObject baseObject in Objects) baseObject.Draw();
+            foreach (BaseCollisionObject baseCollisionObject in CollisionObjects) baseCollisionObject.Draw();
+            foreach (Bullet bullet in Bullets) bullet.Draw();
 
             //_bullet?.Draw();
 
@@ -151,11 +159,13 @@ namespace AsteroidGame
 
         public static void Update()
         {
-            for (int i = 0; i < Objects.Count; i++)
-            {
-                Objects[i].Update();
+            //for (int i = 0; i < Objects.Count; i++)
+            //{
+            //    Objects[i].Update();
                 
-            }
+            //}
+
+            foreach (BaseObject baseObject in Objects) baseObject.Update();
 
             for (int i = 0; i < CollisionObjects.Count; i++)
             {
@@ -163,7 +173,7 @@ namespace AsteroidGame
 
                 for (int j = 0; j < Bullets.Count; j++)
                 {
-                    if (CollisionObjects[i].Collision(Bullets[j]))
+                    if (i < CollisionObjects.Count && CollisionObjects[i].Collision(Bullets[j]))
                     {
                         System.Media.SystemSounds.Hand.Play();
                         CollisionObjects[i].OnCollisionEnter();
@@ -181,17 +191,19 @@ namespace AsteroidGame
                 //    _bullet = null;
                 //}
 
-                if (CollisionObjects[i].Collision(_ship))
+                if ( i < CollisionObjects.Count && CollisionObjects[i].Collision(_ship))
                 {
                     CollisionObjects[i].OnCollisionEnter();
                     _ship.OnCollisionEnter();
                 }
             }
 
-            for (int j = 0; j < Bullets.Count; j++)
-            {
-                Bullets[j].Update();
-            }
+            //for (int j = 0; j < Bullets.Count; j++)
+            //{
+            //    Bullets[j].Update();
+            //}
+
+            foreach (Bullet bullet in Bullets.ToArray()) bullet.Update();
 
             //_bullet?.Update();
 
@@ -215,7 +227,7 @@ namespace AsteroidGame
             if (e.KeyCode == Keys.ControlKey) 
             {
                 //_bullet = new Bullet(new Point(_ship.Rect.X + 10, _ship.Rect.Y + 4), new Point(4, 0), new Size(4, 1));
-                Bullets.Add(new Bullet(new Point(_ship.Rect.X + 10, _ship.Rect.Y + 4), new Point(4, 0), new Size(4, 1)));
+                Bullets.Add(new Bullet(new Point(_ship.Rect.X + 10, _ship.Rect.Y + 4), new Point(_bulletSpeed, 0), new Size(_bulletSize, _bulletSize)));
             }
             if (e.KeyCode == Keys.Up)
             {
@@ -237,6 +249,21 @@ namespace AsteroidGame
         public static void DestroyBullet(Bullet bullet)
         {
             Bullets.Remove(bullet);
+        }
+
+        public static void DestroyAsteroid(Asteroids asteroid)
+        {
+            CollisionObjects.Remove(asteroid);
+            if (CollisionObjects.Count <= 0)
+            {
+                CollisionObjects.Clear();
+                Random rand = new Random();
+                AsteroidCount++;
+                for (int i = 0; i < AsteroidCount; i++)
+                {
+                    CollisionObjects.Add(new Asteroids(new Point(rand.Next(0, 600), rand.Next(10, Height - 10)), new Point(_asteroidSpeed, 0), new Size(_asteroidSize, _asteroidSize)));
+                }
+            }
         }
 
     }
