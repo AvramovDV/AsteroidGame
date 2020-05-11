@@ -22,6 +22,9 @@ namespace WPFLesson5
     {
         private List<Department> _departments;
         private List<Employee> _employees;
+                
+        public List<Department> Departments { get => _departments; }
+        public List<Employee> Emlpoyees { get => _employees; }
 
         public MainWindow()
         {
@@ -62,6 +65,41 @@ namespace WPFLesson5
         private void EmployeesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DepartmentsComboBox.SelectedIndex = _departments.IndexOf(_employees[EmployeesComboBox.SelectedIndex].Department);
+        }
+
+        private void DepartmentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _employees[EmployeesComboBox.SelectedIndex].Department = _departments[DepartmentsComboBox.SelectedIndex];
+        }
+
+        private void NewEmployee_Click(object sender, EventArgs e)
+        {
+            NewEmployeeWindow newEmploeeWindow = new NewEmployeeWindow();
+            newEmploeeWindow.Owner = this;
+            newEmploeeWindow.DepartmentcomboBox.ItemsSource = DepartmentsComboBox.ItemsSource;
+            newEmploeeWindow.DepartmentcomboBox.SelectedIndex = 0;
+            newEmploeeWindow.Show();
+            
+
+        }
+
+        private void NewDepartment_Click(object sender, EventArgs e)
+        {
+            NewDepartmentWindow newDepartmentWindow = new NewDepartmentWindow();
+            newDepartmentWindow.Owner = this;
+            newDepartmentWindow.Show();
+        }
+
+        public void AddEmployee(Employee a)
+        {
+            _employees.Add(a);
+            ShowMyList();
+        }
+
+        public void AddDepartment(Department a)
+        {
+            _departments.Add(a);
+            ShowMyList();
         }
 
     }

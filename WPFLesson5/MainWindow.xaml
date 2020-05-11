@@ -10,7 +10,9 @@
         <ComboBox x:Name="EmployeesComboBox" HorizontalAlignment="Left" Margin="169,194,0,0" VerticalAlignment="Top" Width="120"  SelectionChanged="EmployeesComboBox_SelectionChanged"/>
         <Label x:Name="EmployeesLabel" Content="Сотрудники" HorizontalAlignment="Left" Margin="169,153,0,0" VerticalAlignment="Top"/>
         <Label x:Name="DepartmentsLabel" Content="Отделы" HorizontalAlignment="Left" Margin="466,153,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="DepartmentsComboBox" HorizontalAlignment="Left" Margin="466,194,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="DepartmentsComboBox" HorizontalAlignment="Left" Margin="466,194,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="DepartmentComboBox_SelectionChanged"/>
+        <Button x:Name="AddEmployeeButton" Content="Новый сотрудник" HorizontalAlignment="Left" Margin="169,242,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.228,-0.21" Click="NewEmployee_Click"/>
+        <Button x:Name="AddDepartmentButton" Content="Новый отдел" HorizontalAlignment="Left" Margin="466,242,0,0" VerticalAlignment="Top" Width="120" Click="NewDepartment_Click"/>
 
     </Grid>
 </Window>

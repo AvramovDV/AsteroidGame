@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPFLesson5
 {
-    internal class Department
+    public class Department
     {
         private string _name;
 
