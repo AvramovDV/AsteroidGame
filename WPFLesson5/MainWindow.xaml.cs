@@ -27,6 +27,7 @@ namespace WPFLesson5
         {
             InitializeComponent();
             MyListInI();
+
         }
 
         private void MyListInI()
@@ -44,7 +45,18 @@ namespace WPFLesson5
             _employees.Add(new Employee("Сидоров", _departments[2]));
             _employees.Add(new Employee("Слащев", _departments[3]));
             _employees.Add(new Employee("Игнатьев", _departments[4]));
-            
+
+            ShowMyList();
+
+        }
+
+        private void ShowMyList()
+        {
+            EmployeesComboBox.ItemsSource = _employees.Select(a => a.Name);
+            DepartmentsComboBox.ItemsSource = _departments.Select(a => a.Name);
+
+            EmployeesComboBox.SelectedIndex = 0;
+            DepartmentsComboBox.SelectedIndex = _departments.IndexOf(_employees[0].Department);
         }
 
     }
