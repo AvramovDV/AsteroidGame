@@ -1,0 +1,18 @@
+﻿<Window x:Class="WPFLesson5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFLesson5"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <ComboBox x:Name="EmployeesComboBox" HorizontalAlignment="Left" Margin="169,194,0,0" VerticalAlignment="Top" Width="120"  SelectionChanged="EmployeesComboBox_SelectionChanged"/>
+        <Label x:Name="EmployeesLabel" Content="Сотрудники" HorizontalAlignment="Left" Margin="169,153,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="DepartmentsLabel" Content="Отделы" HorizontalAlignment="Left" Margin="466,153,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="DepartmentsComboBox" HorizontalAlignment="Left" Margin="466,194,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="DepartmentComboBox_SelectionChanged"/>
+        <Button x:Name="AddEmployeeButton" Content="Новый сотрудник" HorizontalAlignment="Left" Margin="169,242,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.228,-0.21" Click="NewEmployee_Click"/>
+        <Button x:Name="AddDepartmentButton" Content="Новый отдел" HorizontalAlignment="Left" Margin="466,242,0,0" VerticalAlignment="Top" Width="120" Click="NewDepartment_Click"/>
+
+    </Grid>
+</Window>
