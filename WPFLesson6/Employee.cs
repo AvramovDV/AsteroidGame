@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace WPFLesson6
 {
-    class Employee
+    public class Employee
     {
+        public Department Depart { get; set; }
+        public string Name { get; set; }
+
+        public Employee(string name, Department department)
+        {
+            Name = name;
+            Depart = department;
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
     }
 }

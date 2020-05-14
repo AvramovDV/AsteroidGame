@@ -6,7 +6,20 @@
         xmlns:local="clr-namespace:WPFLesson6"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:Manager x:Key="Manager"/>
+    </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="181*"/>
+            <ColumnDefinition Width="611*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Отделы">
+            <ListView Name="DepartmentsList" ItemsSource="{Binding Departments, Source={StaticResource Manager} }"/>
+        </GroupBox>
+        <GroupBox Header="Сотрудники" Grid.Column="2">
+            <ListView Name="EmployeesList" ItemsSource="{Binding SelectedValue.Employees, ElementName=DepartmentsList }"/>
+        </GroupBox>
         
     </Grid>
 </Window>
