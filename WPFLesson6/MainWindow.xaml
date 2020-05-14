@@ -43,16 +43,21 @@
 
         <GroupBox Header="Редактирование Сотрудников" Grid.Row="2" Grid.Column="2">
             <StackPanel Orientation="Horizontal">
-                <TextBox Name ="EmployeeNameTextBox"  Width="100" VerticalAlignment="Top" Height="25">
+                <TextBox Name ="EmployeeNameTextBox"  Width="75" VerticalAlignment="Top" Height="25">
 
                 </TextBox>
-                <ComboBox Name ="DepartmentComboBox" Width="100" VerticalAlignment="Top" Height="25" ItemsSource="{Binding Departments, Source={StaticResource Manager}}">
+                <ComboBox Name ="DepartmentComboBox" Width="75" VerticalAlignment="Top" Height="25" ItemsSource="{Binding Departments, Source={StaticResource Manager}}">
                     
                 </ComboBox>
-                <Button VerticalAlignment="Top" Width="100" Height="25" FontSize="14" Content="+" Click="EmployeeAddButtonClick">
+                <Button VerticalAlignment="Top" Width="75" Height="25" FontSize="14" Content="+" Click="EmployeeAddButtonClick">
+
+                </Button>
+                <Button VerticalAlignment="Top" Width="75" Height="25" FontSize="14" Content="Перевести" Click="SetDepartmentButtonClick">
 
                 </Button>
             </StackPanel>
+
+            
         </GroupBox>
         
     </Grid>

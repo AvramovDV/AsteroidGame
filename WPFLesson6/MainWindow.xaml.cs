@@ -59,7 +59,19 @@ namespace WPFLesson6
             {
                 manager.Departments[DepartmentsList.SelectedIndex].Employees.Add(new Employee(EmployeeNameTextBox.Text, (Department)DepartmentsList.SelectedItem));
             }
-            
+        }
+
+        public void SetDepartmentButtonClick(object sender, EventArgs e)
+        {
+            if (DepartmentComboBox.SelectedIndex != -1 && EmployeesList.SelectedIndex != -1)
+            {
+                Employee employee = (Employee) EmployeesList.SelectedItem;
+                Department old = employee.Depart;
+                Department _new = (Department) DepartmentComboBox.SelectedItem;
+                employee.Depart = _new;
+                old.Employees.Remove(employee);
+                _new.Employees.Add(employee);
+            }
 
         }
 
