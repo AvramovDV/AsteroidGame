@@ -11,14 +11,48 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="181*"/>
-            <ColumnDefinition Width="611*"/>
+            <ColumnDefinition Width="300*"/>
+            <ColumnDefinition Width="300*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="300"/>
+        </Grid.RowDefinitions>
+        
         <GroupBox Header="Отделы">
-            <ListView Name="DepartmentsList" ItemsSource="{Binding Departments, Source={StaticResource Manager} }"/>
+            <ListView Name="DepartmentsList" ItemsSource="{Binding Departments, Source={StaticResource Manager} }">
+               
+            </ListView>
         </GroupBox>
         <GroupBox Header="Сотрудники" Grid.Column="2">
-            <ListView Name="EmployeesList" ItemsSource="{Binding SelectedValue.Employees, ElementName=DepartmentsList }"/>
+            <ListView Name="EmployeesList" ItemsSource="{Binding SelectedValue.Employees, ElementName=DepartmentsList }">
+                
+            </ListView> 
+        </GroupBox>
+
+        <GroupBox Header="Радактирование Отделов" Grid.Row="2">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name ="DepartmentNameTextBox"  Width="200" VerticalAlignment="Top" Height="25">
+                    
+                </TextBox>
+                <Button VerticalAlignment="Top" Width="100" Height="25" FontSize="14" Content="+" Click="DepartmentAddButtonClick">
+                    
+                </Button>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Редактирование Сотрудников" Grid.Row="2" Grid.Column="2">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name ="EmployeeNameTextBox"  Width="100" VerticalAlignment="Top" Height="25">
+
+                </TextBox>
+                <ComboBox Name ="DepartmentComboBox" Width="100" VerticalAlignment="Top" Height="25" ItemsSource="{Binding Departments, Source={StaticResource Manager}}">
+                    
+                </ComboBox>
+                <Button VerticalAlignment="Top" Width="100" Height="25" FontSize="14" Content="+" Click="EmployeeAddButtonClick">
+
+                </Button>
+            </StackPanel>
         </GroupBox>
         
     </Grid>

@@ -21,15 +21,47 @@ namespace WPFLesson6
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-        //public ObservableCollection<Employee>
 
+        //public ObservableCollection<Employee>
+        Manager manager;
         public MainWindow()
         {
             InitializeComponent();
-            //Manager m = new Manager();            
+            //Manager m = new Manager();    
+            manager = (Manager)TryFindResource("Manager");
+            
         }
-        
+
+        public void DepartmentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //MessageBox.Show($"{manager.Departments.Count}");
+            Employee employee = manager.Departments[DepartmentsList.SelectedIndex].Employees[EmployeesList.SelectedIndex];
+            Department old = manager.Departments[DepartmentsList.SelectedIndex];
+            Department _new = manager.Departments[((ComboBox)sender).SelectedIndex];
+            employee.Depart = _new;
+            old.Employees.Remove(employee);
+            _new.Employees.Add(employee);
+        }
+
+        public void DepartmentAddButtonClick(object sender, EventArgs e)
+        {
+            manager.Departments.Add(new Department(DepartmentNameTextBox.Text));
+            
+        }
+
+        public void EmployeeAddButtonClick(object sender, EventArgs e)
+        {
+            if (DepartmentComboBox.SelectedIndex != -1)
+            {
+                manager.Departments[DepartmentComboBox.SelectedIndex].Employees.Add(new Employee(EmployeeNameTextBox.Text, (Department)DepartmentComboBox.SelectedItem));
+            }
+            else if (DepartmentsList.SelectedIndex != -1)
+            {
+                manager.Departments[DepartmentsList.SelectedIndex].Employees.Add(new Employee(EmployeeNameTextBox.Text, (Department)DepartmentsList.SelectedItem));
+            }
+            
+
+        }
 
     }
 }
