@@ -22,27 +22,16 @@ namespace WPFLesson6
     public partial class MainWindow : Window
     {
 
-        //public ObservableCollection<Employee>
+        
         Manager manager;
         public MainWindow()
         {
             InitializeComponent();
-            //Manager m = new Manager();    
             manager = (Manager)TryFindResource("Manager");
             
         }
 
-        public void DepartmentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //MessageBox.Show($"{manager.Departments.Count}");
-            Employee employee = manager.Departments[DepartmentsList.SelectedIndex].Employees[EmployeesList.SelectedIndex];
-            Department old = manager.Departments[DepartmentsList.SelectedIndex];
-            Department _new = manager.Departments[((ComboBox)sender).SelectedIndex];
-            employee.Depart = _new;
-            old.Employees.Remove(employee);
-            _new.Employees.Add(employee);
-        }
-
+        
         public void DepartmentAddButtonClick(object sender, EventArgs e)
         {
             manager.Departments.Add(new Department(DepartmentNameTextBox.Text));
