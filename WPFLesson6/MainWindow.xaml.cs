@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Entity;
 
 namespace WPFLesson6
 {
@@ -28,25 +29,58 @@ namespace WPFLesson6
         {
             InitializeComponent();
             _manager = (Manager)TryFindResource("Manager");
-            
+
+            using (var db = new ManagerDB())
+            {
+                //db.Database.Delete();
+                db.Departments.AddRange(_manager.Departments);
+                db.SaveChanges();
+            }
         }
 
         
         public void DepartmentAddButtonClick(object sender, EventArgs e)
         {
-            _manager.Departments.Add(new Department(DepartmentNameTextBox.Text));
-            
+            Department _new = new Department(DepartmentNameTextBox.Text);
+
+            _manager.Departments.Add(_new);
+
+            using (var db = new ManagerDB())
+            {
+                db.Departments.Add(_new);
+                db.SaveChanges();
+            }
+
         }
 
         public void EmployeeAddButtonClick(object sender, EventArgs e)
         {
             if (DepartmentComboBox.SelectedIndex != -1)
             {
-                _manager.Departments[DepartmentComboBox.SelectedIndex].Employees.Add(new Employee(EmployeeNameTextBox.Text, (Department)DepartmentComboBox.SelectedItem));
+                Department current = _manager.Departments[DepartmentComboBox.SelectedIndex];
+                Employee _new = new Employee(EmployeeNameTextBox.Text, (Department)DepartmentComboBox.SelectedItem);
+
+                current.Employees.Add(_new);
+
+                using (var db = new ManagerDB())
+                {
+                    db.Employees.Add(_new);
+                    db.SaveChanges();
+                }
+
             }
             else if (DepartmentsList.SelectedIndex != -1)
             {
-                _manager.Departments[DepartmentsList.SelectedIndex].Employees.Add(new Employee(EmployeeNameTextBox.Text, (Department)DepartmentsList.SelectedItem));
+                Department current = _manager.Departments[DepartmentsList.SelectedIndex];
+                Employee _new = new Employee(EmployeeNameTextBox.Text, (Department)DepartmentsList.SelectedItem);
+
+                current.Employees.Add(_new);
+
+                using (var db = new ManagerDB())
+                {
+                    db.Employees.Add(_new);
+                    db.SaveChanges();                    
+                }
             }
         }
 
@@ -60,6 +94,15 @@ namespace WPFLesson6
                 employee.Depart = _new;
                 old.Employees.Remove(employee);
                 _new.Employees.Add(employee);
+
+                //using (var db = new ManagerDB())
+                //{
+                //    Employee empl = db.Employees.Where(res => res.Id == employee.Id).FirstOrDefault();
+                //    Department dep = db.Departments.Where(res => res.Id == _new.Id).FirstOrDefault();
+                //    empl.Depart = dep;
+                //    db.SaveChanges();
+                //}
+
             }
 
         }
