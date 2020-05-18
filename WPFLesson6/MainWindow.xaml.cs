@@ -23,18 +23,18 @@ namespace WPFLesson6
     {
 
         
-        Manager manager;
+        private Manager _manager;
         public MainWindow()
         {
             InitializeComponent();
-            manager = (Manager)TryFindResource("Manager");
+            _manager = (Manager)TryFindResource("Manager");
             
         }
 
         
         public void DepartmentAddButtonClick(object sender, EventArgs e)
         {
-            manager.Departments.Add(new Department(DepartmentNameTextBox.Text));
+            _manager.Departments.Add(new Department(DepartmentNameTextBox.Text));
             
         }
 
@@ -42,11 +42,11 @@ namespace WPFLesson6
         {
             if (DepartmentComboBox.SelectedIndex != -1)
             {
-                manager.Departments[DepartmentComboBox.SelectedIndex].Employees.Add(new Employee(EmployeeNameTextBox.Text, (Department)DepartmentComboBox.SelectedItem));
+                _manager.Departments[DepartmentComboBox.SelectedIndex].Employees.Add(new Employee(EmployeeNameTextBox.Text, (Department)DepartmentComboBox.SelectedItem));
             }
             else if (DepartmentsList.SelectedIndex != -1)
             {
-                manager.Departments[DepartmentsList.SelectedIndex].Employees.Add(new Employee(EmployeeNameTextBox.Text, (Department)DepartmentsList.SelectedItem));
+                _manager.Departments[DepartmentsList.SelectedIndex].Employees.Add(new Employee(EmployeeNameTextBox.Text, (Department)DepartmentsList.SelectedItem));
             }
         }
 
