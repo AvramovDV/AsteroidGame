@@ -7,12 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-
 namespace WPFLesson6
 {
-    class Manager
+    public class Manager
     {
-        private const int _count = 5;
+       private const int _count = 5;
 
         public ObservableCollection<Department> Departments { get; set; }
 
@@ -28,8 +27,9 @@ namespace WPFLesson6
                 }
                 Departments.Add(a);
             }
+                        
         }
-
+           
         
     }
 }
