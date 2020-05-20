@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WCFClient.ServiceReference1;
 
 namespace WCFClient
 {
@@ -25,7 +27,16 @@ namespace WCFClient
             InitializeComponent();
         }
 
+        private void OnWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            
+            using(ServiceReference1.Service1Client service = new ServiceReference1.Service1Client())
+            {
+                DataSet dataSet = service.GetDataFromDB();
 
 
+
+            }
+        }
     }
 }
