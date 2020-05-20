@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFLesson6", "WPFLesson6\WP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService1", "WcfService1\WcfService1.csproj", "{1409CB5D-FB3C-413F-B81B-18258AC269C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFClient", "WCFClient\WCFClient.csproj", "{C92ECD7F-A364-4B07-B176-61B0040A145F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1409CB5D-FB3C-413F-B81B-18258AC269C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1409CB5D-FB3C-413F-B81B-18258AC269C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1409CB5D-FB3C-413F-B81B-18258AC269C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C92ECD7F-A364-4B07-B176-61B0040A145F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C92ECD7F-A364-4B07-B176-61B0040A145F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C92ECD7F-A364-4B07-B176-61B0040A145F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C92ECD7F-A364-4B07-B176-61B0040A145F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
