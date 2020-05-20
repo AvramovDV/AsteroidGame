@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Configuration;
+
 
 namespace WcfService1
 {
@@ -16,7 +20,7 @@ namespace WcfService1
         {
             return string.Format("You entered: {0}", value);
         }
-
+               
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
             if (composite == null)
@@ -29,5 +33,19 @@ namespace WcfService1
             }
             return composite;
         }
+
+        public DataSet GetDataFromDB()
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Lesson8DB"].ConnectionString))
+            {
+                connection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM DepartmentsTable, EmployeesTable", connection);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                return ds;
+            }
+        }
+
+
     }
 }

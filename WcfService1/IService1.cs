@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -20,10 +21,13 @@ namespace WcfService1
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: Добавьте здесь операции служб
+        [OperationContract]
+        DataSet GetDataFromDB();
     }
 
 
     // Используйте контракт данных, как показано в примере ниже, чтобы добавить составные типы к операциям служб.
+
     [DataContract]
     public class CompositeType
     {
@@ -44,4 +48,5 @@ namespace WcfService1
             set { stringValue = value; }
         }
     }
+
 }
