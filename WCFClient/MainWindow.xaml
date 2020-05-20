@@ -18,7 +18,7 @@
             </ListView>
         </GroupBox>
         <GroupBox Header="Сотрудники" Grid.Column="2">
-            <ListView Name="EmployeesList" ItemsSource="{Binding SelectedValue.Employees, ElementName=DepartmentsList }">
+            <ListView Name="EmployeesList" ItemsSource="{Binding SelectedValue.Employes, ElementName=DepartmentsList }">
 
             </ListView>
         </GroupBox>

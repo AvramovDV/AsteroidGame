@@ -39,7 +39,7 @@ namespace WcfService1
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Lesson8DB"].ConnectionString))
             {
                 connection.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM DepartmentsTable, EmployeesTable", connection);
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM DepartmentsTable;SELECT * FROM EmployeesTable", connection);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
                 return ds;

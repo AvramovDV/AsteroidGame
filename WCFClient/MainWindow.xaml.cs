@@ -22,6 +22,8 @@ namespace WCFClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Department> _departments = new List<Department>();
+        //private List<Employee> _employees = new List<Employee>();
         public MainWindow()
         {
             InitializeComponent();
@@ -34,9 +36,24 @@ namespace WCFClient
             {
                 DataSet dataSet = service.GetDataFromDB();
 
-
+                for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+                {
+                    Department _new = new Department(dataSet.Tables[0].Rows[i].Field<string>("Name"));
+                    for (int j = 0; j < dataSet.Tables[1].Rows.Count; j++)
+                    {
+                        if (dataSet.Tables[1].Rows[j].Field<string>("Department") == _new.Name)
+                        {
+                            _new.Employes.Add(new Employee(dataSet.Tables[1].Rows[j].Field<string>("Name")));
+                        }
+                    }
+                    _departments.Add(_new);
+                }
 
             }
+
+            DepartmentsList.ItemsSource = _departments;
+            //EmployeesList.ItemsSource = _departments[0].Employes;
+
         }
     }
 }
